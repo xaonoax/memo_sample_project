@@ -1,6 +1,8 @@
 package com.example.memo.repository;
 
 import com.example.memo.entity.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +13,6 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Long> {  // JPA를 사용하겠다는 선언
                                                                              // 왼쪽 : 다루는 데이터 타입, 오른쪽 name의 타입
     Optional<Category> findByName(String name);  // 파라미터 name과 같은 name을 가진 Category를 리턴해줌
+
+    Page<Category> findByNameContains(Pageable pageable, String name);  // Contains를 붙리면 검색하는 이름이 포함된 전부를 가져옴
 }
