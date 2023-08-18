@@ -31,6 +31,9 @@ public class CategoryService {
         return category;
     }
 
-
-
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(  // orElseThrow : 데이터가 있으면 가져오고 없으면 예외 발생
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리가 존재하지 않습니다."));
+    }
+    
 }
