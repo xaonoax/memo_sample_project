@@ -4,6 +4,8 @@ import com.example.memo.dto.CategoryDTO;
 import com.example.memo.entity.Category;
 import com.example.memo.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController  // 모든 데이터는 요청과 응답의 body를 json으로 전송하게 한다.
@@ -22,5 +24,10 @@ public class CategoryController {
     @GetMapping("/{id}")
     public Category getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @GetMapping("")
+    public Page<Category> getCategories(Pageable pageable, @RequestParam String keyword) {  // Pageable : 페이징을 위한 파라미터
+        return categoryService.getCategories(pageable, keyword);
     }
 }
