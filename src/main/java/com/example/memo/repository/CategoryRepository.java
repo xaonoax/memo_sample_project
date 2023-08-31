@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {  // 
     Optional<Category> findByName(String name);  // 파라미터 name과 같은 name을 가진 Category를 리턴해줌
 
     Page<Category> findByNameContains(Pageable pageable, String name);  // Contains를 붙리면 검색하는 이름이 포함된 전부를 가져옴
+
+    Category getCategoryById(Long category_id);
 }

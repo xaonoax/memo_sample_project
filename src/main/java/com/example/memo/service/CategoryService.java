@@ -5,6 +5,8 @@ import com.example.memo.entity.Category;
 import com.example.memo.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,5 +37,14 @@ public class CategoryService {
         return categoryRepository.findById(id).orElseThrow(  // orElseThrow : 데이터가 있으면 가져오고 없으면 예외 발생
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리가 존재하지 않습니다."));
     }
-    
+
+    public Page<Category> getCategories(Pageable pageable, String keyword) {
+        if(keyword == null) {
+            return categoryRepository.findAll(pageable);
+        }
+        else {
+            return categoryRepository.findByNameContains(pageable, keyword);
+        }
+    }
+
 }

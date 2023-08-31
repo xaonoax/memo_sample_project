@@ -60,11 +60,9 @@ public class MemoService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "카테고리 ID가 일치하지 않습니다.");
         }
 
-        Category category = categoryRepository.getCategoryById(memoDTO.getCategory_id());
-
         Memo updateMemo = Memo.builder()
                 .id(duplicateMemo.getId())
-                .category(category)
+                .category(duplicateMemo.getCategory())
                 .name(memoDTO.getName())
                 .content(memoDTO.getContent())
                 .build();

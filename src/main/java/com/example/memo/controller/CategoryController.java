@@ -30,4 +30,5 @@ public class CategoryController {
     public Page<Category> getCategories(Pageable pageable, @RequestParam String keyword) {  // Pageable : 페이징을 위한 파라미터
         return categoryService.getCategories(pageable, keyword);
     }
+
 }
